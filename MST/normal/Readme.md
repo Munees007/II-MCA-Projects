@@ -1,0 +1,1 @@
+normal html + typescript projects
