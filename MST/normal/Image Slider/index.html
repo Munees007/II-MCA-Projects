@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Sliders</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="p-3">
+    <div class="w-full flex justify-center p-5 items-center">
+        <!-- Mouse Event -->
+        <div id="mouseDiv"></div>
+        
+    </div>
+    <!-- Options -->
+    <div class="flex gap-3">
+        <button onclick="createMouseDiv()"
+        class="bg-green-500 p-2 w-50 rounded-lg font-bold uppercase tracking-widest hover:scale-105 cursor-pointer active:scale-95">
+        Mouse Event Action</button>
+        <button onclick="createRadioDiv()" class="bg-yellow-500 p-2 w-50 rounded-lg font-bold uppercase tracking-widest  hover:scale-105 cursor-pointer active:scale-95">Radio Button Action</button>
+        <button class="bg-red-500 p-2 w-50 rounded-lg font-bold uppercase tracking-widest  hover:scale-105 cursor-pointer active:scale-95">Arrow Button Action</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
