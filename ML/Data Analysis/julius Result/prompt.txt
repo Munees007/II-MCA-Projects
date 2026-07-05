@@ -1,0 +1,6 @@
+bro i am mca student and i have a zomato data set in this i need to perform some data analysis like 
+1. group by location and pick top 3 resturatants by rating, 
+2. count total orders, online and offline order counts, 
+3. count total resturants withoutduplicates and group resturants using rest_type and its count. 
+finally find average of rating by grouping rest_type and in that top 10 alone can you do these 
+before this clean the data

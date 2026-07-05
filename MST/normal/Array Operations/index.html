@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body  class="bg-gray-900 flex w-full h-screen overflow-hidden justify-center items-center p-5">
+    <div class="bg-gray-600 rounded-lg w-[60%] h-full p-3 flex flex-col gap-2">
+        <p class="text-center font-bold uppercase tracking-widest text-2xl text-white">Array Operations</p>
+        <textarea id="values" placeholder="Enter array values comma seperated (10,20,30)" 
+        class="w-full border text-white border-gray-500 rounded-lg p-2"></textarea>
+        <div class="flex gap-2">
+        <button 
+        id="add"
+        class="cursor-pointer w-30 active:scale-100 transition-all bg-green-500 rounded-lg font-bold uppercase tracking-widest py-1 hover:scale-101">Add</button>
+        <button 
+        id="power"
+        class="cursor-pointer w-40 active:scale-100 transition-all bg-teal-500 rounded-lg font-bold uppercase tracking-widest py-1 hover:scale-101">Power</button>
+        <button 
+        id="posNeg"
+        class="cursor-pointer w-40 active:scale-100 transition-all bg-teal-500 rounded-lg font-bold uppercase tracking-widest py-1 hover:scale-101">Pos Neg</button>
+        <button 
+        id="oddEven"
+        class="cursor-pointer w-40 active:scale-100 transition-all bg-teal-500 rounded-lg font-bold uppercase tracking-widest py-1 hover:scale-101">Odd or Even</button>
+        <button 
+        id="clear"
+        class="cursor-pointer w-40 active:scale-100 transition-all bg-red-500 rounded-lg font-bold uppercase tracking-widest py-1 hover:scale-101">Clear</button>
+        </div>
+        <div  class="border border-gray-500 h-full rounded-lg p-3 overflow-auto">
+            <p id="title" class="text-xl  font-bold text-gray-300 tracking-widest uppercase">Live result</p>
+            <div id="array"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

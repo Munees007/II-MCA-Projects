@@ -24,21 +24,28 @@ const createRadioDiv = () =>{
     const changeBackgroundImage = (imageName:string)=>{
         Imagediv.style.backgroundImage = `url(images/${imageName})`
     }
+    const colors:string[] = ["bg-cyan-500","bg-red-500","bg-orange-500","bg-red-500","bg-blue-500",
+        "bg-green-500","bg-yellow-500","bg-gray-500"
+    ]
     Imagediv.className = "w-96 h-96 bg-no-repeat bg-contain "
     images.forEach((value,index)=>{
+
         const groupDiv = document.createElement("div")
         const radioButton = document.createElement("input")
-        const label = document.createElement("p")
-        groupDiv.className = "flex gap-2"
-        label.innerText = value
-        label.className = "font-bold"
+        groupDiv.className = "relative w-fit h-fit"
         radioButton.type = "radio"
         radioButton.name = "radioAction"
+        if(index == 0)
+        {
+            radioButton.checked = true
+        }
+        radioButton.style.backgroundImage = `url(images/${value})`
+        const className = `appearance-none rounded-lg bg-no-repeat bg-contain border bg-white border-black w-10 h-10 checked:${colors[index]}`
+        radioButton.className = className
         radioButton.addEventListener('click',(e)=>{
             changeBackgroundImage(value)
         })
         groupDiv.appendChild(radioButton)
-        groupDiv.appendChild(label)
         radioDiv.appendChild(groupDiv)
     })
     radioDiv.className = "flex gap-3 items-center"
@@ -48,4 +55,4 @@ const createRadioDiv = () =>{
     mouseDivRef.appendChild(radioDiv)
 }
 
-document.addEventListener('DOMContentLoaded',e => createMouseDiv())
+document.addEventListener('DOMContentLoaded',e => createRadioDiv())
