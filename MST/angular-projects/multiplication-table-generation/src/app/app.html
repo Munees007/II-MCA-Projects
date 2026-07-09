@@ -1,31 +1,28 @@
 <div class="w-full text-[#e94f37] justify-center items-center flex bg-[#393e41] h-screen overflow-hidden">
-  <div class="flex flex-col gap-3 w-[30%] min-h-[70%] rounded-xl shadow-md shadow-black bg-[#f6f7eb] p-3 overflow-auto ">
+  <div class="flex flex-col gap-3 w-[25%] min-h-[70%] rounded-xl shadow-md shadow-black bg-[#f6f7eb] p-3 overflow-auto ">
     <div class="h-fit flex flex-col gap-3 w-full">
       <p class="text-2xl uppercase text-center tracking-widest font-bold">Table Generation</p>
-      <input [(ngModel)]="tableDate().tableNo" placeholder="Enter table number" type="number" class="w-full font-bold uppercase tracking-widest border border-black rounded-lg py-1 px-4 ">
-      <input [(ngModel)]="tableDate().endNo" placeholder="Enter ending number" type="number" class="w-full font-bold uppercase tracking-widest border border-black rounded-lg py-1 px-4 ">
+      <input [(ngModel)]="tableData().tableNo" placeholder="Enter table number" type="number" class="w-full font-bold uppercase tracking-widest border border-black rounded-lg py-1 px-4 ">
+      <input [(ngModel)]="tableData().endNo" placeholder="Enter ending number" type="number" class="w-full font-bold uppercase tracking-widest border border-black rounded-lg py-1 px-4 ">
       <button (click)="generateTable()" class="w-full bg-[#44bba4] text-black uppercase tracking-widest font-bold py-1 rounded-lg
       hover:bg-[#44bba4]/80 active:scale-95 cursor-pointer transition-all">Generate</button>
       <button (click)="clear()" class="w-full bg-[#db2b39] text-black uppercase tracking-widest font-bold py-1 rounded-lg
       hover:bg-[#db2b39]/80 active:scale-95 cursor-pointer transition-all">Clear</button>
     </div>
-    <div>
-      <p class="bg-[#2e282a] py-2 rounded-t-lg text-center uppercase tracking-widest font-bold">Table {{tableDate().tableNo}} from 1 to {{tableDate().endNo}}</p>
-      <div class=" w-full flex justify-evenly border border-[#e94f37]">
-        <p class="border border-[#e94f37] w-full text-center font-bold uppercase tracking-widest">No</p>
-        <p class="border border-[#e94f37] w-full text-center font-bold uppercase tracking-widest">Table</p>
-        <p class="border border-[#e94f37] w-full text-center font-bold uppercase tracking-widest">Value</p>
-      </div>
+    <div class="select-none">
+      <p class="bg-[#2e282a] py-2 rounded-t-lg text-center uppercase tracking-widest font-bold">Table {{tableData().tableNo}} from 1 to {{tableData().endNo}}</p>
       <div class="h-60 overflow-auto scrollbar-none">
         <table class="table-auto h-full w-full border-separate border-spacing-0 border-black border rounded-b-lg">
           
           <tbody>
-            @for(table of tableDate().tables; track $index)
+            @for(table of tableData().tables; track $index)
             {
-              <tr [style.borderBottomRadius]="$index != tableDate().tables.length-1 ? '0px' : '8px'" class="w-full" [style.color]="$index % 2==0 ? 'black' : ''" [style.backgroundColor]="$index % 2 == 0 ? '#de6449' : ''">
-                <th class="border border-black w-1/3" [style.borderBottomLeftRadius]="$index != tableDate().tables.length-1 ? '0px' : '8px'">{{table.sno}}</th>
-                <th class="border border-black w-1/3">{{tableDate().tableNo}}</th>
-                <th class="border border-black w-1/3" [style.borderBottomRightRadius]="$index != tableDate().tables.length-1 ? '0px' : '8px'">{{table.value}}</th>
+              <tr [style.borderBottomRadius]="$index != tableData().tables.length-1 ? '0px' : '8px'" class="w-full" [style.color]="$index % 2==0 ? 'black' : ''" [style.backgroundColor]="$index % 2 == 0 ? '#de6449' : ''">
+                <th class="w-[20%]" [style.borderBottomLeftRadius]="$index != tableData().tables.length-1 ? '0px' : '8px'">{{table.sno}}</th>
+                <th class="w-[20%]">x</th>
+                <th class="w-[20%]">{{tableData().tableNo}}</th>
+                <th class="w-[20%]">=</th>
+                <th class="w-[20%]" [style.borderBottomRightRadius]="$index != tableData().tables.length-1 ? '0px' : '8px'">{{table.value}}</th>
               </tr>
             }
             @empty{

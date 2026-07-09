@@ -11,16 +11,16 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('multiplication-table-generation');
 
-  tableDate = signal({
+  tableData = signal({
     tables: []
   } as TableType)
 
   generateTable = () =>{
-    const {tableNo,endNo} = this.tableDate()
+    const {tableNo,endNo} = this.tableData()
     if(tableNo === undefined || endNo === undefined) return
     for(let i=1;i<=endNo;i++)
     {
-      this.tableDate.update((value)=>{
+      this.tableData.update((value)=>{
         const copy = {...value}
         copy.tables.push({
           sno: i,
@@ -31,6 +31,6 @@ export class App {
     }
   }
   clear = ()=>{
-    this.tableDate.set({tables:[]} as TableType)
+    this.tableData.set({tables:[]} as TableType)
   }
 }
