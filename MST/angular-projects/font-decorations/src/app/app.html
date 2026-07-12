@@ -1,0 +1,45 @@
+<div class="p-3 flex flex-col justify-center w-full items-center gap-3 h-screen">
+  <p class="text-center text-3xl font-bold uppercase tracking-widest text-[#f4f7fc]">Text Decoration</p>
+  <div class="gap-3 grid grid-cols-3 mt-3 max-sm:grid-cols-1">
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Width & height</p>
+      <input [(ngModel)]="decorationData.w_h" class=" border p-2 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="number">
+    </div>
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Text Color</p>
+      <input [(ngModel)]="decorationData.textColor" class=" border h-15 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="color" placeholder="pick color">
+    </div>
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Background Color</p>
+      <input [(ngModel)]="decorationData.backgroundColor" class=" border h-15 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="color" placeholder="pick color">
+    </div>
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Border Color</p>
+      <input [(ngModel)]="decorationData.borderColor" class=" border h-15 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="color" placeholder="pick color">
+    </div>
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Border Radius</p>
+      <input [(ngModel)]="decorationData.borderRadius" class=" border h-15 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="range" placeholder="pick color">
+    </div>
+    @for (selectData of decorations; track $index) {
+      <app-custom-select (sendData)="selectData.handleValue($event)" [selectData]="selectData"></app-custom-select>
+    }
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Font Size</p>
+      <input [(ngModel)]="decorationData.fontSize" class=" border p-2 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="range">
+    </div>
+    <div class=" text-[#f4f7fc] flex items-center w-100 justify-between ">
+      <p class="text-xl w-60">Text</p>
+      <input [(ngModel)]="textInput" class=" border p-2 border-[#40516a] rounded-lg bg-[#1b2b43] w-full" type="text">
+    </div>
+  </div>
+  <div class="h-full w-full flex justify-center items-center">
+    <div [ngStyle]="boxStyle"
+    class="flex justify-center items-center" 
+    >
+      <p class="text-white text-center" [ngStyle]="textStyle"
+      >{{textInput}}</p>
+    </div>
+  </div>
+</div>
+<router-outlet />

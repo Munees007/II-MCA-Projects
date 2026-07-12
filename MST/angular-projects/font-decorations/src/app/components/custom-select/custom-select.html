@@ -1,0 +1,9 @@
+<div class="text-[#f4f7fc] flex items-center w-100 justify-between">
+    <p class="text-xl w-60">{{selectData()?.title}}</p>
+    <select (change)="onSelect($event)" class="appearance-auto border border-[#40516a] rounded-lg p-2 bg-[#1b2b43] w-full" title="{{selectData()?.title}}">
+        @for(option of selectData()?.options; track $index)
+        {
+            <option class="bg-[#1b2b43]" value="{{option}}">{{option}}</option>
+        }
+    </select>
+</div>
