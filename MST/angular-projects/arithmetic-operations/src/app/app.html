@@ -1,0 +1,28 @@
+<div class="flex flex-col justify-center items-center h-screen">
+  <div class=" flex flex-col justify-center items-center gap-3 bg-[#1c2541] p-3 rounded-lg shadow-lg shadow-black">
+    <p class="text-2xl font-bold text-[#5bc0be] uppercase tracking-widest">Arithmetic Operations</p>
+    <select class="appearance-auto w-80 p-2 text-base bg-[#3a506b] text-white border border-gray-300 rounded-lg" title="Arithmetic Operations" [(ngModel)]="selectedIndex" (change)="resetValue()">
+      @for (option of options; track $index) {
+        <option value="{{$index}}">{{option.title}}</option>
+      }
+    </select>
+
+    @if(selectedIndex != null)
+    {
+      <div class="flex flex-col w-80  gap-3">
+      @if(options[selectedIndex].inputCount == 2)
+      {
+        
+          <input class="border border-gray-300 text-white p-2 text-xl font-bold rounded-lg bg-[#3a506b]" type="number" placeholder="Enter number 1" [(ngModel)]="num1">
+          <input class="border border-gray-300 text-white p-2 text-xl font-bold rounded-lg bg-[#3a506b]" type="number" placeholder="Enter number 2" [(ngModel)]="num2">
+        
+      }
+      @else {
+        <input class="border border-gray-300 text-white p-2 text-xl font-bold rounded-lg bg-[#3a506b]" type="number" placeholder="Enter number" [(ngModel)]="num1">
+      }
+        <p class="text-white text-xl uppercase font-bold tracking-wider">{{options[selectedIndex].title}}: {{options[selectedIndex].operation()}}</p>
+      </div>
+    }
+  </div>
+</div>
+<router-outlet />
