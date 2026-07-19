@@ -1,0 +1,109 @@
+<div class="min-h-screen w-full bg-[#101014] p-3 text-[#f8fafc]">
+  <div class="mx-auto flex w-full max-w-7xl flex-col gap-3">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <button class="bg-[#facc15] text-[#111111] font-bold rounded-lg border border-[#f8fafc] py-1 w-30 cursor-pointer transition-all hover:scale-105
+            active:scale-95" (click)="toogleDialog()">Add Student</button>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button [class]="filter == 'all' ? 'bg-[#facc15] text-[#111111] font-bold rounded-lg border border-[#f8fafc] px-3 py-1 cursor-pointer transition-all active:scale-95' : 'bg-[#242933] text-[#f8fafc] font-bold rounded-lg border border-[#3f4654] px-3 py-1 cursor-pointer transition-all hover:bg-[#334155] active:scale-95'"
+          (click)="filter = 'all'">All</button>
+        <button [class]="filter == 'failed' ? 'bg-[#ef4444] text-white font-bold rounded-lg border border-[#fecaca] px-3 py-1 cursor-pointer transition-all active:scale-95' : 'bg-[#242933] text-[#f8fafc] font-bold rounded-lg border border-[#3f4654] px-3 py-1 cursor-pointer transition-all hover:bg-[#334155] active:scale-95'"
+          (click)="filter = 'failed'">Failed</button>
+        <button [class]="filter == 'pass' ? 'bg-[#22c55e] text-[#04130a] font-bold rounded-lg border border-[#bbf7d0] px-3 py-1 cursor-pointer transition-all active:scale-95' : 'bg-[#242933] text-[#f8fafc] font-bold rounded-lg border border-[#3f4654] px-3 py-1 cursor-pointer transition-all hover:bg-[#334155] active:scale-95'"
+          (click)="filter = 'pass'">Pass</button>
+        <button [class]="filter == 'top5' ? 'bg-[#facc15] text-[#111111] font-bold rounded-lg border border-[#f8fafc] px-3 py-1 cursor-pointer transition-all active:scale-95' : 'bg-[#242933] text-[#f8fafc] font-bold rounded-lg border border-[#3f4654] px-3 py-1 cursor-pointer transition-all hover:bg-[#334155] active:scale-95'"
+          (click)="filter = 'top5'">Top 5</button>
+
+        <select [(ngModel)]="sortBy" class="h-9 rounded-lg border border-[#3f4654] bg-[#181b22] px-2 font-bold text-[#f8fafc] outline-none">
+          <option value="rollNo">Sort: Roll No</option>
+          <option value="name">Sort: Name</option>
+          <option value="totalHigh">Sort: Total High</option>
+          <option value="totalLow">Sort: Total Low</option>
+        </select>
+      </div>
+    </div>
+
+  @if(showDialog)
+  {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3">
+      <div class="bg-[#1d2027] p-3 rounded-lg flex flex-col gap-2 w-full max-w-96 border border-[#3f4654] shadow-2xl">
+        <div class="flex items-center justify-between">
+          <p class="font-bold text-lg text-center uppercase tracking-widest">Student Generator</p>
+          <button class="bg-[#ef4444] text-white font-bold rounded-lg border border-[#fecaca] px-2 cursor-pointer transition-all hover:scale-105
+          active:scale-95" (click)="toogleDialog()">X</button>
+        </div>
+        <input [disabled]="student_data.students.length > 0"
+        class="text-xl rounded-lg border border-[#3f4654] p-1 bg-[#12141a] text-[#f8fafc] placeholder:text-[#8b94a7] disabled:bg-[#2b3039] disabled:text-[#8b94a7]" (input)="setTotalmarks()"
+        [(ngModel)]="student_data.markCount" placeholder="Enter Mark Count" type="number">
+
+        <p class="text-md font-bold uppercase tracking-widest text-[#facc15]">Total Marks: {{student_data.totalMarks}}</p>
+        <hr class="border-[#3f4654]"/>
+        <p class="font-bold text-lg text-center uppercase tracking-widest">Student Details</p>
+        <input 
+        class="text-xl rounded-lg border border-[#3f4654] p-1 bg-[#12141a] text-[#f8fafc] placeholder:text-[#8b94a7]"
+        [(ngModel)]="rollNo" placeholder="Enter Student roll no" type="text">
+        <input 
+        class="text-xl rounded-lg border border-[#3f4654] p-1 bg-[#12141a] text-[#f8fafc] placeholder:text-[#8b94a7]"
+        [(ngModel)]="name" placeholder="Enter Student name" type="text">
+        <div class="flex flex-col gap-2">
+          @for (mark of student_data.markArr; track $index) {
+            <input 
+        class="text-xl rounded-lg border border-[#3f4654] p-1 bg-[#12141a] text-[#f8fafc] placeholder:text-[#8b94a7]"
+        [(ngModel)]="student_data.markArr[$index]" placeholder="Enter Mark {{$index + 1}}" type="number">
+          }
+        </div>
+        @if(error != "")
+        {
+          <p class="rounded-lg border border-[#ef4444] bg-[#451a1a] p-2 font-bold text-[#fecaca]">{{error}}</p>
+        }
+        <button (click)="AddStudent()" class="bg-[#22c55e] text-[#04130a] font-bold rounded-lg border border-[#bbf7d0] py-1 cursor-pointer transition-all hover:scale-105
+        active:scale-95">Add</button>
+      </div>
+    </div>
+  }
+  <div class="h-[75vh] w-full overflow-auto rounded-lg border border-[#3f4654]">
+    <table class="w-full min-w-[850px] table-fixed border-separate border-spacing-0 text-[#f8fafc] bg-[#1d2027]">
+      <thead class="sticky top-0 z-40 bg-[#15171c]">
+        <tr class="h-12">
+          <th class="w-20 border-b border-[#3f4654] px-2">S. No</th>
+          <th class="border-b border-[#3f4654] px-2">Roll No</th>
+          <th class="w-80 border-b border-[#3f4654] px-2">Name</th>
+          @for (mark of student_data.markArr; track $index) {
+            <th class="border-b border-[#3f4654] px-2">Sub {{$index + 1}}</th>
+          }
+          <th class="border-b border-[#3f4654] px-2">Total</th>
+          <th class="border-b border-[#3f4654] px-2">Result</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        @for (student of getStudents(); track $index) {
+          <tr [class]="isFailed(student) ? 'h-12 bg-[#7f1d1d] text-[#fee2e2] font-bold' : 'h-12 transition-colors hover:bg-[#2a3441]'">
+            <td class="w-20 border-b border-[#3f4654] px-2 text-center">{{$index + 1}}</td>
+            <td class="border-b border-[#3f4654] px-2 text-center">{{student.rollNo}}</td>
+            <td class="w-80 border-b border-[#3f4654] px-2">{{student.name}}</td>
+            @for (mark of student.marks; track $index) {
+              <td class="border-b border-[#3f4654] px-2 text-center">{{mark}}</td>
+            }
+            <td class="border-b border-[#3f4654] px-2 text-center">{{student.getTotal()}}</td>
+            <td class="border-b border-[#3f4654] px-2 text-center">
+              @if(isFailed(student))
+              {
+                Failed
+              }
+              @else {
+                Pass
+              }
+            </td>
+          </tr>
+        }
+        @empty {
+          <tr>
+              <th [attr.colspan]="student_data.markCount + 5" class="h-20 text-2xl uppercase tracking-widest text-[#8b94a7]">No Records</th>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>  
+<router-outlet />
